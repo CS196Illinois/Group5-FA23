@@ -1,1 +1,3 @@
 Fill out this directory with folders for each student (using netid for folder name) and add placeholder files in each folder so that the directory can be added to git
+
+asdfghknlm,bvcxdfghjk.m, nbvcxzdfgjh,nm. cxgfdhkj.,m nvbcxfhjkl;m,.
