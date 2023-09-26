@@ -7,7 +7,4 @@ Team Members: andylp2, devl2, joshch2, muxuz2, nathanm9, yiming31
 <<<<<<< HEAD
  
 Project Manager: weiyiyc2
-=======
 
-Project Manager: weiyiyc2,
->>>>>>> 1d357dc4f87c54c030a5130e2cb776fd3a4cb049
