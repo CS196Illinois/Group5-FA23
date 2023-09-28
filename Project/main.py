@@ -32,13 +32,11 @@ def add_task():
             if s['vote_average'] == 0.0:
                 continue;
             genre_list = get_genres(s['genre_ids'])
-            print(genre_list)
             movies.append(s['title'] + ' -- RATING: ' + str(s['vote_average']) + ' -- GENRES: ' + str(genre_list))
     return redirect(url_for('index'))
 
 def get_genres(genre_ids): 
     genres = []
-    print("\nin get_genres method LFGGGGGGGGG\n")
     for id in genre_ids:
         for genre_tv_dict in genres_tv:
             if genre_tv_dict.get("id") == id:
