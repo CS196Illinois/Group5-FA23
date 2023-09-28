@@ -14,34 +14,30 @@ movie.title
 movie.budget
 
 response = movie.releases()
-# for c in movie.countries:
-#     if c['iso_3166_1'] == 'US':
-#          print(c['certification'])
-
-# response = search.movie(query='Marvel')
-# for s in search.results:
-#     print(s['title'], s['id'], s['release_date'], s['popularity'])
     
 app = Flask(__name__)
 
-# Create a list to store tasks
-tasks = []
+movies = []
 
-# Define a route to display the tasks
 @app.route('/')
 def index():
-    return render_template('index.html', tasks=tasks)
+    return render_template('index.html', movies=movies)
 
-# Define a route to add a new task
 @app.route('/search_movie', methods=['POST'])
 def add_task():
     search = tmdb.Search()
+    movies.clear()
     movie = search.movie(query=request.form.get('task'))
     if movie:
         for s in search.results:
-            tasks.append(s['title'])
-    print(tasks)
+            movies.append(s['title'])
+    print(movies)
     return redirect(url_for('index'))
+
+@app.route('/show_movie', methods=['POST']) 
+def movieList(): 
+    movieList = movies
+    return render_template('index.html', movieList=movieList)
 
 if __name__ == '__main__':
     app.run(debug=True)
