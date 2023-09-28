@@ -27,7 +27,7 @@ def index():
 def add_task():
     search = tmdb.Search()
     movies.clear()
-    movie = search.movie(query=request.form.get('task'))
+    movie = search.movie(query=request.form.get('movie'))
     if movie:
         for s in search.results:
             movies.append(s['title'])
