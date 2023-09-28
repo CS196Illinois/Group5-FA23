@@ -13,14 +13,6 @@ tmdb.API_KEY = '5a8a2d7a85da710fe84e0c72953832c3'
 tmdb.REQUESTS_TIMEOUT = 5 
 
 tmdb.REQUESTS_TIMEOUT = (2, 5)
-
-movie = tmdb.Movies(603)
-response = movie.info()
-movie.title
-
-movie.budget
-
-response = movie.releases()
     
 app = Flask(__name__)
 
