@@ -1,6 +1,13 @@
 import tmdbsimple as tmdb
 from flask import Flask, render_template, request, redirect, url_for
+import json
 
+with open('Project/genres_movies.json') as f:
+    genres_movies = json.load(f).get("genres_movies")
+    
+with open('Project/genres_tv.json') as f:
+    genres_tv = json.load(f).get("genres_tv")
+    
 tmdb.API_KEY = '5a8a2d7a85da710fe84e0c72953832c3'
 
 tmdb.REQUESTS_TIMEOUT = 5 
@@ -30,9 +37,28 @@ def add_task():
     movie = search.movie(query=request.form.get('movie'))
     if movie:
         for s in search.results:
-            movies.append(s['title'])
-    print(movies)
+            if s['vote_average'] == 0.0:
+                continue;
+            genre_list = get_genres(s['genre_ids'])
+            print(genre_list)
+            movies.append(s['title'] + ' -- RATING: ' + str(s['vote_average']) + ' -- GENRES: ' + str(genre_list))
     return redirect(url_for('index'))
+
+def get_genres(genre_ids): 
+    genres = []
+    print("\nin get_genres method LFGGGGGGGGG\n")
+    for id in genre_ids:
+        for genre_tv_dict in genres_tv:
+            if genre_tv_dict.get("id") == id:
+                genres.append(genre_tv_dict.get("name"))
+        for genre_movie_dict in genres_movies:
+            if genre_movie_dict.get("id") == id:
+                if genre_movie_dict.get("name") in genres:
+                    continue
+                else: 
+                    genres.append(genre_movie_dict.get("name"))
+    return genres
+    
 
 @app.route('/show_movie', methods=['POST']) 
 def movieList(): 
