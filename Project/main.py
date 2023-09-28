@@ -32,6 +32,8 @@ def add_task():
             if s['vote_average'] == 0.0:
                 continue;
             genre_list = get_genres(s['genre_ids'])
+            if (len(genre_list)) == 0:
+                continue
             movies.append(s['title'] + ' -- RATING: ' + str(s['vote_average']) + ' -- GENRES: ' + str(genre_list))
     return redirect(url_for('index'))
 
