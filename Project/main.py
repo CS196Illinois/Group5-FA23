@@ -29,12 +29,10 @@ def add_task():
     movie = search.movie(query=request.form.get('movie'))
     if movie:
         for s in search.results:
-            if s['vote_average'] == 0.0:
-                continue;
-            genre_list = get_genres(s['genre_ids'])
-            if (len(genre_list)) == 0:
-                continue
-            movies.append(s['title'] + ' -- RATING: ' + str(s['vote_average']) + ' -- GENRES: ' + str(genre_list))
+            if s['vote_average'] > 0.0:
+                genre_list = get_genres(s['genre_ids'])
+                if (len(genre_list)) > 0:
+                    movies.append(f"{s['title']} -- RATING: {str(s['vote_average'])} -- GENRES: {str(genre_list)}")
     return redirect(url_for('index'))
 
 def get_genres(genre_ids): 
@@ -45,9 +43,7 @@ def get_genres(genre_ids):
                 genres.append(genre_tv_dict.get("name"))
         for genre_movie_dict in genres_movies:
             if genre_movie_dict.get("id") == id:
-                if genre_movie_dict.get("name") in genres:
-                    continue
-                else: 
+                if genre_movie_dict.get("name") not in genres:
                     genres.append(genre_movie_dict.get("name"))
     return genres
     
