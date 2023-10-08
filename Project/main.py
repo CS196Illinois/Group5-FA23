@@ -20,10 +20,16 @@ movies = []
 
 @app.route('/')
 def index():
+    """
+    Renders the index.html template with the movies list.
+    """
     return render_template('index.html', movies=movies)
 
 @app.route('/search_movie', methods=['POST'])
 def add_task():
+    """
+    Searches for movies based on the user's input and adds them to the movies list.
+    """
     search = tmdb.Search()
     movies.clear()
     movie = search.movie(query=request.form.get('movie'))
@@ -36,6 +42,9 @@ def add_task():
     return redirect(url_for('index'))
 
 def get_genres(genre_ids): 
+    """
+    Returns a list of genres based on the genre IDs provided.
+    """
     genres = []
     for id in genre_ids:
         for genre_tv_dict in genres_tv:
@@ -50,6 +59,9 @@ def get_genres(genre_ids):
 
 @app.route('/show_movie', methods=['POST']) 
 def movieList(): 
+    """
+    Renders the index.html template with the movieList.
+    """
     movieList = movies
     return render_template('index.html', movieList=movieList)
 
