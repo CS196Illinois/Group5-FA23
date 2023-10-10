@@ -1,2 +1,5 @@
 Fill out this directory with folders for each student (using netid for folder name) and add placeholder files in each folder so that the directory can be added to git
-WEWEEWEWEEEEWEEEEEWEEEEEWEE
+Cosine similarity:
+https://medium.com/@bkexcel2014/building-movie-recommender-systems-using-cosine-similarity-in-python-eff2d4e60d24
+https://towardsdatascience.com/using-cosine-similarity-to-build-a-movie-recommendation-system-ae7f20842599
+Movie dataset I'm using taken from ^
