@@ -4,7 +4,7 @@ from IPython.display import display
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-df = pd.read_csv("c:/Users/theob/OneDrive/Desktop/Group5-FA23/Research/andylp2/tmdb_movies_data.csv").reset_index()
+df = pd.read_csv("tmdb_movies_data.csv")
 #for col in df.columns:
     #print(col)
 #df['id']
