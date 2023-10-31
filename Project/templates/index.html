@@ -2,22 +2,22 @@
 <html>
 
 <head>
-    <title></title>
+    <title>Login</title>
 </head>
 
 <body>
-    <h1>SEARCH A MOVIE</h1>
-    
-    <form method="POST" action="/search_movie">
-        <input type="text" name="movie" placeholder="Type in a movie">
-        <button type="submit">Search</button>
-    </form>
+    <div id="search" style="display: none;">
+        <form method="POST" action="/search_movie">
+            <input type="text" name="movie" placeholder="Type in a movie">
+            <button type="submit" on>Search</button>
+        </form>
 
-    <ul>
-        {% for movie in movies %}
-        <li>{{ movie }}</li>
-        {% endfor %}
-    </ul>
+        <ul>
+            {% for movie in movies %}
+            <li>{{ movie }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
 </body>
 
