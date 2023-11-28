@@ -5,16 +5,35 @@
     <title>ShowMe!</title>
 </head>
 
+<style>
+    body{
+        /* background-image: linear-gradient(to right, #BFF098, #6FD6FF); */
+        background-color: #121212;
+    }
+    .title{
+        background: -webkit-linear-gradient(45deg, #BFF098, #6FD6FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+    }
+    .search-results{
+        background: -webkit-linear-gradient(45deg, #BFF098, #6FD6FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+    }
+</style>
+
 <body>
     
-    <h1>ShowMe!</h1>
+    <h1 class="title">ShowMe!</h1>
     <div id="search" style="display: block;">
         <form method="POST" action="/search_movie">
             <input type="text" name="movie" placeholder="Type in a movie">
             <button type="submit" on>Search</button>
         </form>
 
-        <ul>
+        <ul class="search-results">
             {% for movie in movies %}
             <li>{{ movie }}</li>
             {% endfor %}
