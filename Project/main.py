@@ -21,7 +21,9 @@ app = Flask(__name__)
 
 movies = []
 
-df = pd.read_csv('movie_dataset.csv').reset_index()
+sorted_by_popularity = []
+
+df = pd.read_csv("Project/tmdb_movies_data.csv").reset_index()
 
 features = ['keywords', 'cast', 'genres', 'director', 'overview', 'production_companies', 'tagline']
 for feature in features:
@@ -42,7 +44,7 @@ def index():
     """
     Renders the index.html template with the movies list.
     """
-    return render_template('index.html', movies=movies)
+    return render_template('index.html', sorted_by_popularity=sorted_by_popularity)
 
 @app.route('/search_movie', methods=['POST'])
 def add_task():
@@ -50,30 +52,32 @@ def add_task():
     Searches for movies based on the user's input and adds them to the movies list.
     """
     search = tmdb.Search()
-    movies.clear()
-    movie = search.movie(query=request.form.get('movie'))
+    search.movie(query=request.form.get('movie'))
+    movie = (search.results[0]['original_title'])
     if (movie in df['original_title'].unique()) == False:
-        movies = ["Movie not found"];
         return redirect(url_for('index'))
         
     index = df[df["original_title"] == movie]["index"].values[0]
     
     similar_movies = list(enumerate(cosine_sim[index]))
     
-    movies = sorted(similar_movies, key=lambda x:x[1], reverse=True)
-    
-    sorted_by_popularity = []
+    sorted_similar_movies = sorted(similar_movies, key=lambda x:x[1], reverse=True)
+
+    sorted_by_popularity.clear()
     
     i = 0
     
-    for movie in movies:
+    for movie in sorted_similar_movies:
         #print(get_title_from_index(movie[0]))
         #print(sorted_similar_movies[i])
-        sorted_by_popularity.append({"TITLE":df[df.index == movie[0]]["original_title"].values[0]})
+        sorted_by_popularity.append(df[df.index == movie[0]]["original_title"].values[0])
         #print(df[df.original_title == "Jurassic World"]["popularity"])
         i+=1
-        if i>50:
+        if i>10:
             break
+        
+        
+    print(sorted_by_popularity)
         
     # if movie:
     #     for s in search.results:
@@ -83,29 +87,15 @@ def add_task():
     #                 movies.append(f"{s['title']} -- RATING: {str(s['vote_average'])} -- GENRES: {str(genre_list)}")
     return redirect(url_for('index'))
 
-def get_genres(genre_ids): 
-    """
-    Returns a list of genres based on the genre IDs provided.
-    """
-    genres = []
-    for id in genre_ids:
-        for genre_tv_dict in genres_tv:
-            if genre_tv_dict.get("id") == id:
-                genres.append(genre_tv_dict.get("name"))
-        for genre_movie_dict in genres_movies:
-            if genre_movie_dict.get("id") == id:
-                if genre_movie_dict.get("name") not in genres:
-                    genres.append(genre_movie_dict.get("name"))
-    return genres
-    
-
 @app.route('/show_movie', methods=['POST']) 
 def movieList(): 
     """
     Renders the index.html template with the movieList.
     """
-    movieList = movies
-    return render_template('index.html', movieList=movieList)
+    print("SDRTYUIOOLIUYTRDFGHJKL:OIUYTRDFGHJKIUYTRDFGHJKIOIUYTRFDFGHJKLOIUYTRFDFGHJ\n\n\n\n\n\n")
+    print(type(sorted_by_popularity))
+
+    return render_template('index.html', sorted_by_popularity=sorted_by_popularity)
 
 if __name__ == '__main__':
     app.run()

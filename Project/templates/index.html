@@ -17,7 +17,7 @@
             -webkit-text-fill-color: transparent;
     }
     .search-results{
-        background: -webkit-linear-gradient(45deg, #BFF098, #6FD6FF);
+        background: -webkit-linear-gradient(135deg, #BFF098, #6FD6FF);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -34,8 +34,8 @@
         </form>
 
         <ul class="search-results">
-            {% for movie in movies %}
-            <li>{{ movie }}</li>
+            {% for movie in sorted_by_popularity %}
+            <ul>{{ movie }}</ul>
             {% endfor %}
         </ul>
     </div>
