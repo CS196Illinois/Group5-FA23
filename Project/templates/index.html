@@ -3,43 +3,41 @@
 
 <head>
     <title>ShowMe!</title>
+    <style>
+        body {
+            background-color: #121212;
+        }
+
+        .title {
+            background: -webkit-linear-gradient(45deg, #BFF098, #6FD6FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-results {
+            background: -webkit-linear-gradient(135deg, white, white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
 
-<style>
-    body{
-        /* background-image: linear-gradient(to right, #BFF098, #6FD6FF); */
-        background-color: #121212;
-    }
-    .title{
-        background: -webkit-linear-gradient(45deg, #BFF098, #6FD6FF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-    }
-    .search-results{
-        background: -webkit-linear-gradient(135deg, #BFF098, #6FD6FF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-    }
-</style>
-
 <body>
-    
     <h1 class="title">ShowMe!</h1>
-    <div id="search" style="display: block;">
+    <div id="search">
         <form method="POST" action="/search_movie">
             <input type="text" name="movie" placeholder="Type in a movie">
-            <button type="submit" on>Search</button>
+            <button type="submit">Search</button>
         </form>
 
         <ul class="search-results">
             {% for movie in sorted_by_popularity %}
-            <ul>{{ movie }}</ul>
+            <li>{{ movie }}</li>
             {% endfor %}
         </ul>
     </div>
-
 </body>
 
 </html>
