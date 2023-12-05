@@ -30,7 +30,7 @@ for feature in features:
     df[feature] = df[feature].fillna('')
 
 def combined_features(row):
-    return row['keywords'].replace('|', " ")+" "+row['cast'].replace('|', " ")+" "+row['genres'].replace('|', " ")+row['genres'].replace('|', " ")+row['genres'].replace('|', " ")+row['genres'].replace('|', " ")+" "+row['director']+" "+row['overview']+" "+row['production_companies'].replace('|', " ")+" "+row['tagline']
+    return row['keywords'].replace('|', " ")+" "+row['cast'].replace('|', " ")+" "+row['genres'].replace('|', " ")+row['genres'].replace('|', " ")+" "+row['director']+" "+row['overview']+" "+row['production_companies'].replace('|', " ")+" "+row['tagline']
 df["combined_features"] = df.apply(combined_features, axis =1)
 
 cv = CountVectorizer()

@@ -6,38 +6,73 @@
     <style>
         body {
             background-color: #121212;
+            font-family: Arial, sans-serif;
+            color: white;
         }
 
         .title {
-            background: -webkit-linear-gradient(45deg, #BFF098, #6FD6FF);
+            background: linear-gradient(45deg, #BFF098, #6FD6FF);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-size: 48px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            width: 300px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #6FD6FF;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            margin-left: 10px;
         }
 
         .search-results {
-            background: -webkit-linear-gradient(135deg, white, white);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-top: 50px;
+            list-style-type: none;
+            text-align: center;
+        }
+
+        .search-results li {
+            margin-bottom: 10px;
+            font-size: 24px;
         }
     </style>
 </head>
 
 <body>
     <h1 class="title">ShowMe!</h1>
-    <div id="search">
+    <div class="search-container">
         <form method="POST" action="/search_movie">
-            <input type="text" name="movie" placeholder="Type in a movie">
-            <button type="submit">Search</button>
+            <input class="search-input" type="text" name="movie" placeholder="Type in a movie">
+            <button class="search-button" type="submit">Search</button>
         </form>
-
-        <ul class="search-results">
-            {% for movie in sorted_by_popularity %}
-            <li>{{ movie }}</li>
-            {% endfor %}
-        </ul>
     </div>
+
+    <ul class="search-results">
+        {% for movie in sorted_by_popularity %}
+        <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
 </body>
 
 </html>
